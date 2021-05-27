@@ -26,10 +26,13 @@ Looking at our example above, one thing we can say is that the optimal substruct
 
 ## DP Problem solving pipeline
 
-    1. Always try to numericalize the given problem. For example, if the problem involves an array or string, try to present the problem in terms of the index of the element in the array or the index of character in the string. Further, in some cases, even if the problem itself is numerical, rephrasing the problem with different numericalization might render the problem being lot more easy to solve.
-    2. Next try to reframe the given problem in terms of similar smaller subproblems to generate the state transition equations. The most important practice to think in this way is to try out a lot of recursive problems.
-    3. Then based on the problem statement, come up with the base cases that have the direct values and do not need to be solved recursively.
-    4. Be aware of the subproblems that are recurring and find ways to store these values so that any future subproblem that relies on the answer of the previous subproblems can directly use them.
+1. Always try to numericalize the given problem. For example, if the problem involves an array or string, try to present the problem in terms of the index of the element in the array or the index of character in the string. Further, in some cases, even if the problem itself is numerical, rephrasing the problem with different numericalization might render the problem being lot more easy to solve.
+
+2. Next try to reframe the given problem in terms of similar smaller subproblems to generate the state transition equations. The most important practice to think in this way is to try out a lot of recursive problems.
+
+3. Then based on the problem statement, come up with the base cases that have the direct values and do not need to be solved recursively.
+
+4. Be aware of the subproblems that are recurring and find ways to store these values so that any future subproblem that relies on the answer of the previous subproblems can directly use them.
 
 We will look into a few problems below and disect them in an attempt to follow through the above DP problem solving pipeline just to have better understanding of it. Let's look at the following string/array based DP problems from Leetcode: 72. Edit Distance 1143. Longest Common Subsequence 300. Longest Increasing Subsequence
 Starting with 300., the first thing in solving a problem is to read it carefully enough such that we do not miss any detail in the question. Let me rewrite the problem while reading it slowly: We are given an **unsorted** array of integers. We need to find the **length of the longest** increasing subsequence. The first thing is to figure out that the question is asking for the longest something, making DP one of the viable approaches to solve the problem.
