@@ -7,15 +7,15 @@
         
         
         
-        <link rel="shortcut icon" href="/img/favicon.ico">
-        <title>Technical Interviews</title>
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/css/base.css" rel="stylesheet">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Moving forward vs moving backward in DP problems - Technical Interviews</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
-        <script src="/js/jquery-1.10.2.min.js" defer></script>
-        <script src="/js/bootstrap.min.js" defer></script>
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
@@ -23,7 +23,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="/.">Technical Interviews</a>
+                <a class="navbar-brand" href="../..">Technical Interviews</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -34,18 +34,18 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="navitem">
-                                <a href="/." class="nav-link">The Plan</a>
+                                <a href="../.." class="nav-link">The Plan</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Concepts <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="/concepts/dp/" class="dropdown-item">Dynamic Programming</a>
+    <a href="../dp/" class="dropdown-item">Dynamic Programming</a>
 </li>
                                     
 <li>
-    <a href="/concepts/dpAdd/" class="dropdown-item">Moving forward vs moving backward in DP problems</a>
+    <a href="./" class="dropdown-item active">Moving forward vs moving backward in DP problems</a>
 </li>
                                 </ul>
                             </li>
@@ -57,6 +57,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../dp/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -64,15 +74,29 @@
 
         <div class="container">
             <div class="row">
-
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
-      </div>
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
     </div>
 
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#moving-forward-vs-moving-backward-in-dp-problems" class="nav-link">Moving forward vs moving backward in DP problems</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
 
+<h1 id="moving-forward-vs-moving-backward-in-dp-problems">Moving forward vs moving backward in DP problems</h1>
+<p>Today while looking at the keyboard with leetcode 651. 4 keys keyboard problem, we were having some hard time to relate this problem with any other DP problems, because the solution mechanism is a bit tricky and different. So, we will be discussing about these mechanisms in details in this article. Every DP problem starts with numericalization, and then defining the states. Based on these states, we come up with the state transition equations. So far, in our problems, we defined a final state that provides the answer to the problem at hand, then we looked at the subproblems that we solved in a top-down approach. In the bottom-up approach, we started with the base cases (the smallest subproblems), and moved forward to eventually reach the final state. So, the blueprint for solving these problems was: for top-down approach, we started with the state for the final problem definition and moved recursively downwards into the subproblems, until we reached the base case from which we returned back. Similarly, in the bottom-up approach of the problems, we started with the base cases and slowly built more complex problems from them and moved towards the final problem.
+The case with the 4 Keys keyboard is a bit different, because when we define (number of keystrokes (either remaining or pressed), number of items in the screen, number of items in the clipboard), we do not really know the final state we will be in. So, the above approaches are not gonna work. So, for the top down approach, instead of moving from the state definition of the final problem, we need to start from the state definition of the initial state which is known to us (number of keystrokes (either remaining or pressed)=n or 0, items in screen = 0, items in clipboard = 0).</p></div>
             </div>
         </div>
 
@@ -81,11 +105,11 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = "/",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="/js/base.js" defer></script>
-        <script src="/search/main.js" defer></script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

@@ -43,6 +43,10 @@
 <li>
     <a href="./" class="dropdown-item active">Dynamic Programming</a>
 </li>
+                                    
+<li>
+    <a href="../dpAdd/" class="dropdown-item">Moving forward vs moving backward in DP problems</a>
+</li>
                                 </ul>
                             </li>
                         </ul>
@@ -59,7 +63,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../dpAdd/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -95,6 +99,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#states-and-choices" class="nav-link">States and Choices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -126,7 +134,7 @@ Well, what are OPs?: Simply presenting, they are the problems that seek to find 
 <p>Always try to numericalize the given problem. For example, if the problem involves an array or string, try to present the problem in terms of the index of the element in the array or the index of character in the string. Further, in some cases, even if the problem itself is numerical, rephrasing the problem with different numericalization might render the problem being lot more easy to solve.</p>
 </li>
 <li>
-<p>Next try to reframe the given problem in terms of similar smaller subproblems to generate the state transition equations. The most important practice to think in this way is to try out a lot of recursive problems.</p>
+<p>Next try to reframe the given problem in terms of similar smaller subproblems to generate the state transition equations. The most important practice to think in this way is to try out a lot of recursive problems. While thinking the solution of the problem as the development from the subproblems that have the same definition but involving subparts of the given input, the best practice would be to believe that we already have answers to these subproblems.</p>
 </li>
 <li>
 <p>Then based on the problem statement, come up with the base cases that have the direct values and do not need to be solved recursively.</p>
@@ -137,7 +145,16 @@ Well, what are OPs?: Simply presenting, they are the problems that seek to find 
 </ol>
 <p>We will look into a few problems below and disect them in an attempt to follow through the above DP problem solving pipeline just to have better understanding of it. Let's look at the following string/array based DP problems from Leetcode: 72. Edit Distance 1143. Longest Common Subsequence 300. Longest Increasing Subsequence
 Starting with 300., the first thing in solving a problem is to read it carefully enough such that we do not miss any detail in the question. Let me rewrite the problem while reading it slowly: We are given an <strong>unsorted</strong> array of integers. We need to find the <strong>length of the longest</strong> increasing subsequence. The first thing is to figure out that the question is asking for the longest something, making DP one of the viable approaches to solve the problem.</p>
-<p>Following the first step of the pipeline, let's first try to numericalize the problem. One approach would be to descibe the given array with two numbers, the indices of the first and the last elements of the array. This way, we can look at the subproblems being the subarrays represented with the indices between the indices of the original problem. I am sure you must have lost my explanation here. So, let's look at an example. If the given array is [10,9,2,5,3,7,101,18], we numericalize the problem as follows: find the length of longest increasing subsequence for the given array between the indices 0 and 7 (inclusive). With this as the main problem, our subproblems might be to find the same thing (length of the longest subsequence for the given array) between indices 1 and 3 or between 2 and 5. Similarly, the subproblems for the one between indices 1 and 3 include the indices betwee 1 and 2 or between 2 and 3 or between 2 and 2, etc. One thing you might have noticed while defining the problem with two indices, we can see that the subproblems are being defined with movements on both the ends. Obviously, a problem with movement on the both ends will be difficult to solve, so let's try to renumericalize the problem with a single movable component. Let's say, we fix the first index at 0 for every possible subproblems, and renumericalize the problem as finding the longest increasing subsequence for the array ending at the index 7. Now, the subproblems would include that ending at index 6, index 5, etc. People like to define these indices in the problems as pointers (which are just a fancy way of saying the same thing).</p></div>
+<p>Following the first step of the pipeline, let's first try to numericalize the problem. One approach would be to descibe the given array with two numbers, the indices of the first and the last elements of the array. This way, we can look at the subproblems being the subarrays represented with the indices between the indices of the original problem. I am sure you must have lost my explanation here. So, let's look at an example. If the given array is [10,9,2,5,3,7,101,18], we numericalize the problem as follows: find the length of longest increasing subsequence for the given array between the indices 0 and 7 (inclusive). With this as the main problem, our subproblems might be to find the same thing (length of the longest subsequence for the given array) between indices 1 and 3 or between 2 and 5. Similarly, the subproblems for the one between indices 1 and 3 include the indices betwee 1 and 2 or between 2 and 3 or between 2 and 2, etc. One thing you might have noticed while defining the problem with two indices, we can see that the subproblems are being defined with movements on both the ends. Obviously, a problem with movement on the both ends will be difficult to solve, so let's try to renumericalize the problem with a single movable component, if possible. Let's say, we fix the first index at 0 for every possible subproblems, and renumericalize the problem as finding the longest increasing subsequence for the array upto the index 7. Notice, that I am using upto the index 7, rather than saying ending at index 7.</p>
+<!--- This is because our longest subsequence of the entire array might not involve the last element of the array at all. --->
+
+<p>We can compute the value of LIS using the definition as <strong>ending at index 7</strong> as well, but wanted to let you know that different defintion will yield different approaches later in the pipeline, and if we happen to mix them up, we are not going to get the correct answer, so while numericalizing the problem, pay extra attention not to miss out the minute details that you have assumed. Now, the subproblems would include the <strong>longest length of LIS</strong> (notice that I am using the same definition of problem for the subproblems!) upto the index 6, upto the index 5, etc. People like to define these indices in the problems as pointers (which are just a fancy way of saying the same thing).</p>
+<p>Now, let's try to rephrase our problem as a development from the subproblems. Like we said above, while looking for the solution for the problem, let's not try to think about solving subproblems from their own subproblems at this point in time. But rather let's believe that there's already solutions to every subproblem of the problem. Once we are able to define the solution completely with the help of subproblems, same solution will apply to the subproblems of each subproblem, and so on. I know it is difficult to understand what I am trying to say here, so let's try to apply this concept for the above question. To find the longest length of LIS for the array upto the index 7, let's believe that we already have LIS for the arrays upto any index before 7. Now, with this assumption of <strong>longest length of LIS</strong> already been computed for lower indices, how can we use these integer values of LISes to find <strong>longest length of LIS</strong> upto index 7? To answer this question, let's look at the fundamental definition of <strong>Increasing</strong> Subsequence before dealing with the longest one. For this, always think in linear steps, because that's how comuters execute your code, right? So, for example, to create a subsequence of length 4, we start with the first element of the sequence. Next, to put the second element to the <strong>Increasing</strong> sequence, we put this second item to the sequence, only if it is larger than the first one. Then for the third element, we put it to the sequence only if it is larger than the second element, and so on. So, with the length of LISes upto any of the array indices before 7 already computed, we would be able to extend the length of any of these subsequences, only if the element in index 7 is larger than the element at the respective index, right? So, let's say we have our longest length of LIS for index 1, 2, and 3 as p, q, and r. So, if we are trying to find LIS of l
+...</p>
+<h2 id="states-and-choices">States and Choices</h2>
+<p>Read every question very carefully. Every question will have states. For example, in case of stock buy and sell problem, we are given the prices of stocks on each day in form of an array and our goal is to maximize the profit that we can get. One thing we have to make sure while buying and selling the stocks is that we are not allowed to have hold of any stock before buying a new one. If we have to buy a new stock, we need to check if we have already owned a stock, if so, we need to first sell it, and only than we can buy a new one.</p>
+<p>Solving this problem boils down to states, and choices. So, each day we have an option to buy, sell, or remain idle. Meaning, one of our states could be the day where we currently are on, right? And as you might have guessed, our choices in each day is to buy, sell, or remain idle. Now, have we completely defined the problem in terms of states and choices. I think not, we still need to handle the requirement that we can only own a single stock at any instance. Meaning, our choices are constrained. So, to handle the constaints in the choices, we need to define it in terms of other state(s). And I generally call these states as the induced state, the other states that we define directly from the question, I call them direct states.</p>
+<p>Also, we need to make sure that our DP solution handles every possible states in the state transition equations. That's for now! We will get into the details of the solution of the stock problems later.</p></div>
             </div>
         </div>
 
